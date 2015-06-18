@@ -25,6 +25,7 @@
         <activity android:name=".SearchidActivity"></activity>
         <activity android:name=".SearchpwdActivity"></activity>
         <activity android:name=".JoinActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
