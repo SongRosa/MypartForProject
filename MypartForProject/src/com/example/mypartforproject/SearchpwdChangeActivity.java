@@ -27,31 +27,34 @@ public class SearchpwdChangeActivity extends Activity {
 	
 	public void ChangepwdButtonClicked(View v){		
 		int pwdCheck = 0;
-		if(searchpwdchange_et_pwd.getText().length() == 0 || searchpwdchange_et_pwd1.getText().length() == 0){
-			searchpwdchange_tv_pwd.setText("비밀번호를 입력해주세요.");
-			searchpwdchange_tv_pwd.setVisibility(View.VISIBLE);
-			
-			if(searchpwdchange_et_pwd.getText().length() == 0){
-				searchpwdchange_et_pwd.requestFocus();
-			}else{
-				searchpwdchange_et_pwd1.requestFocus();
-			}
-		}else if(searchpwdchange_et_pwd.getText().length() < 8){
-			searchpwdchange_et_pwd.setVisibility(View.VISIBLE);
-			searchpwdchange_et_pwd.setText("비밀번호는 최소 8자이상입니다.");			
-		}else if(searchpwdchange_et_pwd.getText().length()>=8){
-			if(!searchpwdchange_et_pwd.getText().toString().equals(searchpwdchange_et_pwd1.getText().toString())){
-				searchpwdchange_tv_pwd.setText( "입력하신 비밀번호가 일치하지 않습니다.");
+
+		if(true){
+			if(searchpwdchange_et_pwd.getText().length() == 0 || searchpwdchange_et_pwd1.getText().length() == 0){
+				searchpwdchange_tv_pwd.setText("비밀번호를 입력해주세요.");
 				searchpwdchange_tv_pwd.setVisibility(View.VISIBLE);
-				searchpwdchange_et_pwd.requestFocus();
-			}else{
-				searchpwdchange_tv_pwd.setVisibility(View.GONE);
-				pwdCheck = 1;
+				
+				if(searchpwdchange_et_pwd.getText().length() == 0){
+					searchpwdchange_et_pwd.requestFocus();
+				}else{
+					searchpwdchange_et_pwd1.requestFocus();
+				}
+			}else if(searchpwdchange_et_pwd.getText().length() < 8){
+				searchpwdchange_et_pwd.setVisibility(View.VISIBLE);
+				searchpwdchange_et_pwd.setText("비밀번호는 최소 8자이상입니다.");			
+			}else if(searchpwdchange_et_pwd.getText().length()>=8){
+				if(!searchpwdchange_et_pwd.getText().toString().equals(searchpwdchange_et_pwd1.getText().toString())){
+					searchpwdchange_tv_pwd.setText( "입력하신 비밀번호가 일치하지 않습니다.");
+					searchpwdchange_tv_pwd.setVisibility(View.VISIBLE);
+					searchpwdchange_et_pwd.requestFocus();
+				}else{
+					searchpwdchange_tv_pwd.setVisibility(View.GONE);
+					pwdCheck = 1;
+				}
 			}
-		}
-		
-		if(pwdCheck == 0){
-			return;
+			
+			if(pwdCheck == 0){
+				return;
+			}
 		}
 	}
 	
