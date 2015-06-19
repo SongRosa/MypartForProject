@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/searchpwd" >
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/whitelogo"
+            android:onClick="LogoButtonClicked" />
+    </LinearLayout>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="비밀번호 재설정"
+            android:textSize="25dp"/>        
+            
+ 		<LinearLayout 
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:orientation="vertical"
+	            android:gravity="center">
+	            
+		        <EditText
+		            android:id="@+id/searchpwdchange_et_pwd"
+		            android:layout_width="306dp"
+		            android:layout_height="45dp"
+		            android:layout_marginTop="10dp"
+		            android:background="@drawable/textbox"
+		            android:gravity="center"
+		            android:hint="@string/hint_pwd"
+		            android:lines="1"
+		            android:nextFocusDown="@+id/searchpwdchange_et_pwd1"
+		            android:inputType="textPassword"
+		            android:singleLine="true"
+		            android:maxLength="16"
+		            android:textSize="20sp" />
+	            
+		        <EditText
+		            android:id="@+id/searchpwdchange_et_pwd1"
+		            android:layout_width="306dp"
+		            android:layout_height="45dp"
+		            android:layout_marginTop="10dp"
+		            android:background="@drawable/textbox"
+		            android:gravity="center"
+		            android:hint="@string/hint_pwd1"
+		            android:lines="1"
+		            android:nextFocusDown="@+id/join_et_nick"		            
+		            android:inputType="textPassword"
+		            android:singleLine="true"
+		            android:maxLength="16"
+		            android:textSize="20sp" />
+		        
+		        <TextView
+		            android:id="@+id/searchpwdchange_tv_pwd"
+		            android:layout_width="306dp"
+		            android:layout_height="25dp"
+		            android:layout_marginTop="5dp"
+		            android:gravity="center_horizontal"
+		            android:textColor="#e40059"
+		            android:visibility="gone" />	
+	        </LinearLayout>
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">        
+        
+        <Button
+		    android:id="@+id/searchidconform_btn_login"
+		    android:layout_width="305dp"
+		    android:layout_height="48dp"
+	        android:layout_margin="10dp"
+		    android:background="@drawable/button_style"
+		    android:text="비밀번호 변경하기"
+		    android:textSize="20dp"
+		    android:textColor="#FFFFFF"
+		    android:onClick="ChangepwdButtonClicked" />   
+        
+    </LinearLayout>
+</LinearLayout>

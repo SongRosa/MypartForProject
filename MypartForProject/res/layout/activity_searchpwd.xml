@@ -4,17 +4,114 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 	
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
-        android:gravity="center">
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/searchpwd" >
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/whitelogo"
+            android:onClick="LogoButtonClicked" />
+    </LinearLayout>
+    
+     <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
         
-        <ImageView 
-	        android:layout_width="200dp"
-	        android:layout_height="70dp"
-	        android:background="@drawable/logo"/>
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:gravity="center">             
+             
+			<EditText 
+	            android:id="@+id/searchpwd_et_id"
+	            android:layout_width="306dp"
+	            android:layout_height="50dp"
+	            android:layout_margin="5dp"
+	            android:hint="아이디를 입력해주세요"
+	            android:gravity="center"
+	            android:maxLength="25"
+			    android:background="@drawable/textbox"/>
+		
+	        <TextView
+	            android:id="@+id/searchpwd_tv_id"
+	            android:layout_width="306dp"
+	            android:layout_height="25dp"
+	            android:layout_marginTop="5dp"
+	            android:gravity="center_horizontal"
+	            android:textColor="#e40059"
+	            android:visibility="gone"/>
+         </LinearLayout>
         
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:gravity="center"> 
+	        <EditText 
+	            android:id="@+id/searchpwd_et_name"
+	            android:layout_width="306dp"
+	            android:layout_height="50dp"
+	            android:layout_margin="5dp"
+	            android:hint="이름을 입력해주세요"
+	            android:gravity="center"
+	            android:maxLength="10"
+			    android:background="@drawable/textbox"/>       
+	         
+	        <TextView
+	            android:id="@+id/searchpwd_tv_name"
+	            android:layout_width="306dp"
+	            android:layout_height="25dp"
+	            android:layout_marginTop="5dp"
+	            android:gravity="center_horizontal"
+	            android:textColor="#e40059"
+	            android:visibility="gone"/>
+        </LinearLayout>
+        
+         
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:gravity="center"> 
+	        <EditText 
+	            android:id="@+id/searchpwd_et_email"
+	            android:layout_width="306dp"
+	            android:layout_height="50dp"
+	            android:layout_margin="5dp"
+	            android:hint="이메일을 입력해주세요"
+	            android:gravity="center"
+	            android:maxLength="25"
+	            android:inputType="textEmailAddress"
+			    android:background="@drawable/textbox"/> 
+			     
+			<TextView
+	            android:id="@+id/searchpwd_tv_email"
+	            android:layout_width="306dp"
+	            android:layout_height="25dp"
+	            android:layout_marginTop="5dp"
+	            android:gravity="center_horizontal"
+	            android:textColor="#e40059"
+	            android:visibility="gone"/>
+        </LinearLayout>
+        
+        <Button
+			    android:id="@+id/searchpwd_btn_ok"
+			    android:layout_width="305dp"
+			    android:layout_height="48dp"
+		        android:layout_margin="10dp"
+			    android:background="@drawable/button_style"
+			    android:text="확인"
+			    android:textSize="20dp"
+			    android:textColor="#FFFFFF"
+			    android:onClick="SearchpwdButtonClicked" />
     </LinearLayout>
 </LinearLayout>

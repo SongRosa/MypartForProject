@@ -25,7 +25,7 @@
         android:layout_marginTop="30dp">
            <LinearLayout
 	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
+	        android:layout_height="wrap_content"
 	        android:orientation="vertical"
 	        android:gravity="center">
 	        
@@ -46,7 +46,8 @@
 		            android:lines="1"
 		            android:nextFocusDown="@+id/join_et_pwd"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:maxLength="12"
+		            android:textSize="20sp" />
 	
 		        <TextView
 		            android:id="@+id/join_tv_id"
@@ -74,9 +75,10 @@
 		            android:hint="@string/hint_pwd"
 		            android:lines="1"
 		            android:nextFocusDown="@+id/join_et_pwd1"
-		            android:password="true"
+		            android:inputType="textPassword"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:maxLength="16"
+		            android:textSize="20sp" />
 	            
 		        <EditText
 		            android:id="@+id/join_et_pwd1"
@@ -87,10 +89,11 @@
 		            android:gravity="center"
 		            android:hint="@string/hint_pwd1"
 		            android:lines="1"
-		            android:nextFocusDown="@+id/join_et_nick"
-		            android:password="true"
+		            android:nextFocusDown="@+id/join_et_nick"		            
+		            android:inputType="textPassword"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:maxLength="16"
+		            android:textSize="20sp" />
 		        
 		        <TextView
 		            android:id="@+id/join_tv_pwd"
@@ -120,7 +123,8 @@
 		            android:lines="1"
 		            android:nextFocusDown="@+id/join_et_name"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:maxLength="10"
+		            android:textSize="20sp" />
 	
 		        <TextView
 		            android:id="@+id/join_tv_nick"
@@ -148,7 +152,17 @@
 		            android:lines="1"
 		            android:nextFocusDown="@+id/join_et_email"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:maxLength="10"
+		            android:textSize="20sp" />
+		        
+		        <TextView
+		            android:id="@+id/join_tv_name"
+		            android:layout_width="306dp"
+		            android:layout_height="25dp"
+		            android:layout_marginTop="5dp"
+		            android:gravity="center_horizontal"
+		            android:textColor="#e40059"
+		            android:visibility="gone" />
 	        </LinearLayout>
 	        
 	        <LinearLayout 
@@ -166,8 +180,9 @@
 		            android:gravity="center"
 		            android:hint="@string/hint_email"
 		            android:lines="1"
+		            android:inputType="textEmailAddress"
 		            android:singleLine="true"
-		            android:textSize="20dp" />
+		            android:textSize="20sp" />
 	
 		        <TextView
 		            android:id="@+id/join_tv_email"
@@ -190,7 +205,7 @@
 			        android:layout_width="306dp"
 			        android:layout_height="45dp"
 			        android:layout_margin="10dp"
-			        android:textSize="20dp"
+			        android:textSize="20sp"
 				    android:background="@drawable/button_style"
 				    android:text = "가입하기"
 			   		android:textColor="#FFFFFF"
