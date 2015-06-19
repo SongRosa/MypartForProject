@@ -1,11 +1,14 @@
 package com.example.mypartforproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchpwdChangeActivity extends Activity {
 
@@ -39,8 +42,8 @@ public class SearchpwdChangeActivity extends Activity {
 					searchpwdchange_et_pwd1.requestFocus();
 				}
 			}else if(searchpwdchange_et_pwd.getText().length() < 8){
-				searchpwdchange_et_pwd.setVisibility(View.VISIBLE);
-				searchpwdchange_et_pwd.setText("비밀번호는 최소 8자이상입니다.");			
+				searchpwdchange_tv_pwd.setVisibility(View.VISIBLE);
+				searchpwdchange_tv_pwd.setText("비밀번호는 최소 8자이상입니다.");			
 			}else if(searchpwdchange_et_pwd.getText().length()>=8){
 				if(!searchpwdchange_et_pwd.getText().toString().equals(searchpwdchange_et_pwd1.getText().toString())){
 					searchpwdchange_tv_pwd.setText( "입력하신 비밀번호가 일치하지 않습니다.");
@@ -56,6 +59,19 @@ public class SearchpwdChangeActivity extends Activity {
 				return;
 			}
 		}
+		
+		new AlertDialog.Builder(this)
+			.setTitle("비밀번호 재설정 성공")
+			.setMessage("비밀번호가 재설정되었습니다.")
+			.setNeutralButton("로그인하러가기", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Intent it = new Intent(getApplicationContext(), LoginActivity.class);
+					startActivity(it);
+					finish();
+				}
+			}).show();
 	}
 	
 	public void LogoButtonClicked(View v){
