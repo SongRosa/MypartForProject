@@ -28,6 +28,7 @@
         <activity android:name=".JoinActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SearchpwdChangeActivity"></activity>
+        <activity android:name=".MypageActivity"></activity>
     </application>
 
 </manifest>

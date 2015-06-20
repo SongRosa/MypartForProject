@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@drawable/mypage" >
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/whitelogo"
+            android:onClick="LogoButtonClicked" />
+    </LinearLayout>
+    
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
+        
+        <!-- 스크롤 뷰 안 전체를 잡아주는 레이아웃 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            
+            <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+        
+      		  <!-- 비밀번호 변경 공간 전체를 잡아주는 레이아웃 -->
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:gravity="center">                
+                        
+      		 	 <!-- 비밀번호 변경(TextView), 수정 버튼 -->
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:gravity="center_vertical"
+                        android:text="비밀번호 변경"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="수정"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+                        android:onClick="GototheChangePwdButton" />
+
+                </LinearLayout>
+                
+      		 	 <!-- 변경할 비밀번호 입력, 재확인, 변경 버튼 -->
+                <LinearLayout 
+                    android:id="@+id/mypage_ll_pwdChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+                    
+                    <EditText 
+                        android:id="@+id/mypage_et_pwd"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:hint="@string/hint_changepwd"                        
+		            	android:background="@drawable/textbox"
+		            	android:gravity="center"
+		            	android:lines="1"
+		            	android:maxLength="16"
+		            	android:textSize="18sp"
+		            	android:inputType="textPassword"/>
+                    
+                    <EditText 
+                        android:id="@+id/mypage_et_pwd1"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="@string/hint_changepwd1"                        
+		            	android:background="@drawable/textbox"
+		            	android:gravity="center"
+		            	android:lines="1"
+		            	android:maxLength="16"
+		            	android:textSize="18sp"
+		            	android:inputType="textPassword"/>
+                    
+	    	        <TextView
+			            android:id="@+id/mypage_tv_pwd"
+			            android:layout_width="306dp"
+			            android:layout_height="25dp"
+			            android:layout_marginTop="5dp"
+			            android:gravity="center_horizontal"
+			            android:textColor="#e40059"
+			            android:visibility="gone" />
+	    	        
+                    <Button 
+                        android:id="@+id/mypage_btn_pwdChange"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="비밀번호 변경"
+                        android:textSize="18dp"
+                        android:textColor="#ffffff"
+                        android:onClick="ChangePwdButtonClicked"/>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+            
+             <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center">                
+                        
+      		 	 <!-- 닉네임 변경(TextView), 수정 버튼 -->
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:gravity="center_vertical"
+                        android:text="닉네임 변경"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="수정"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+		            	android:onClick="GototheChangeNickButton" />
+
+                </LinearLayout>
+                
+      		 	 <!-- 변경할 이름 입력, 닉네임, 변경 버튼 -->
+                <LinearLayout 
+                    android:id="@+id/mypage_ll_nickChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+                    
+                    <EditText 
+                        android:id="@+id/mypage_et_nick"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:hint="@string/hint_changenick"                        
+		            	android:background="@drawable/textbox"
+		            	android:gravity="center"
+		            	android:lines="1"
+		            	android:maxLength="16"
+		            	android:textSize="18sp"/>
+                 
+                    <TextView
+			            android:id="@+id/mypage_tv_nick"
+			            android:layout_width="306dp"
+			            android:layout_height="25dp"
+			            android:layout_marginTop="5dp"
+			            android:gravity="center_horizontal"
+			            android:textColor="#e40059"
+			            android:visibility="gone" />
+                    
+                    <Button 
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="닉네임 변경"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:onClick="ChangeNickButtonClicked"/>
+                </LinearLayout>
+              </LinearLayout>
+            
+              <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+            
+             <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center">                
+                        
+      		 	 <!-- 이름 변경(TextView), 수정 버튼 -->
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:gravity="center_vertical"
+                        android:text="이름 변경"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="수정"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+		            	android:onClick="GototheChangeNameButton" />
+
+                </LinearLayout>
+                
+      		 	 <!-- 변경할 이름 입력, 닉네임, 변경 버튼 -->
+                <LinearLayout 
+                    android:id="@+id/mypage_ll_nameChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+                    
+                    <EditText 
+                        android:id="@+id/mypage_et_name"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="@string/hint_changename"                        
+		            	android:background="@drawable/textbox"
+		            	android:gravity="center"
+		            	android:lines="1"
+		            	android:maxLength="16"
+		            	android:textSize="18sp"/>
+                    
+                    <TextView
+			            android:id="@+id/mypage_tv_name"
+			            android:layout_width="306dp"
+			            android:layout_height="25dp"
+			            android:layout_marginTop="5dp"
+			            android:gravity="center_horizontal"
+			            android:textColor="#e40059"
+			            android:visibility="gone" />
+                    
+                    <Button 
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="이름 변경"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:onClick="ChangeNameButtonClicked"/>
+                </LinearLayout>
+              </LinearLayout>
+             
+              <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+            
+             <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center">                
+                        
+      		 	 <!-- 이름/닉네임 변경(TextView), 수정 버튼 -->
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:gravity="center_vertical"
+                        android:text="이메일 변경"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="수정"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+		            	android:onClick="GototheChangeEmailButton" />
+
+                </LinearLayout>
+                
+      		 	 <!-- 변경할 이름 입력, 닉네임, 변경 버튼 -->
+                <LinearLayout 
+                    android:id="@+id/mypage_ll_emailChange"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+                    
+                    <EditText 
+                        android:id="@+id/mypage_et_email"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:hint="@string/hint_changenick"                        
+		            	android:background="@drawable/textbox"
+		            	android:gravity="center"
+		            	android:lines="1"
+		            	android:maxLength="16"
+		            	android:textSize="18sp"
+		            	android:inputType="textEmailAddress"/>
+                    
+                    <TextView
+			            android:id="@+id/mypage_tv_email"
+			            android:layout_width="306dp"
+			            android:layout_height="25dp"
+			            android:layout_marginTop="5dp"
+			            android:gravity="center_horizontal"
+			            android:textColor="#e40059"
+			            android:visibility="gone" />
+                    
+                    <Button 
+                        android:id="@+id/mypage_btn_emailChange"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="이메일 변경"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:onClick="ChangeEmailButtonClicked"/>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+            
+            <Button 
+                android:layout_width="265dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/button_style"
+                android:text="메인으로 돌아가기"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:onClick="GototheMainButton"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

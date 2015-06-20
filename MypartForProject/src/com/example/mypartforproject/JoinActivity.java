@@ -115,7 +115,7 @@ public class JoinActivity extends Activity{
 				if(!join_et_pwd.getText().toString().equals(join_et_pwd1.getText().toString())){
 					join_tv_pwd.setText( "입력하신 비밀번호가 일치하지 않습니다.");
 					join_tv_pwd.setVisibility(View.VISIBLE);
-					join_et_pwd.requestFocus();
+					join_et_pwd1.requestFocus();
 					
 					pwd = 0;
 				}else{
@@ -137,7 +137,6 @@ public class JoinActivity extends Activity{
 			}
 			
 			if(join_et_name.getText().length() == 0){
-				Log.e("aaa", "이름을 입력해주세요.");
 				join_tv_name.setVisibility(View.VISIBLE);
 				join_tv_name.setText("이름를 입력해주세요.");
 				join_et_name.requestFocus();
@@ -148,13 +147,11 @@ public class JoinActivity extends Activity{
 			}		
 			
 			if(join_et_email.getText().length() == 0){
-				Log.e("aaa", "이메일을 입력해주세요.");
 				join_tv_email.setVisibility(View.VISIBLE);
 				join_tv_email.setText("이메일를 입력해주세요.");
 				join_et_email.requestFocus();
 				email=0;
 			}else if(!checkEmail(join_et_email.getText().toString())){
-				Log.e("aaa", "이메일을 입력해주세요.");
 				join_tv_email.setVisibility(View.VISIBLE);
 				join_tv_email.setText("이메일 형식에 맞게 입력해주세요.");
 				join_et_email.requestFocus();
