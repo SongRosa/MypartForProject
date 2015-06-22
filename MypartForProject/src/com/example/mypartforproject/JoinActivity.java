@@ -264,7 +264,7 @@ public class JoinActivity extends Activity{
 			/*RequestXml_Member.requestGet_memberInsert(requestURL, join_et_id.getText().toString(), 
 													  join_et_pwd.getText().toString(),join_et_name.getText().toString(), 
 													  join_et_nick.getText().toString(), join_et_email.getText().toString());*/
-			requestURL = "http://192.168.0.20:8089/HanOracle/test/board_delete.jsp?parkNum=81";
+			requestURL = "http://192.168.0.20:8089/HanOracle/test/board_delete.jsp?parkNum=104";
 			RequestXml_Member.requestGet(requestURL);
 			return null;
 		}
