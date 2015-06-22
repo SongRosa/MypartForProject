@@ -38,7 +38,7 @@ public class RequestXml_Member {
 			HttpClient client = new DefaultHttpClient();
 			
 			System.out.println("requestURL :::::: " + requestURL);
-			requestURL = requestURL + "?id="+id+"&pwd="+pwd+"&name="+name+"&nick"+nick+"&email"+email; 
+			requestURL = requestURL + "?id="+id+"&pwd="+pwd+"&name="+name+"&nick="+nick+"&email="+email; 
 			
 			System.out.println(requestURL);
 			
@@ -48,10 +48,10 @@ public class RequestXml_Member {
 			HttpResponse response = client.execute(get);
 			System.out.println("execute");
 			
-			HttpEntity entity = response.getEntity();
+			//HttpEntity entity = response.getEntity();
 			System.out.println("getEntity");
 			
-			InputStream is = entity.getContent();
+			//InputStream is = entity.getContent();
 			System.out.println("getContent");
 			
 		}catch(Exception e){

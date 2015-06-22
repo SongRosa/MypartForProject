@@ -52,7 +52,7 @@ public class JoinActivity extends Activity{
 	int email = 0;
 	
 	BackgroundTask bt;
-	String requestURL = "http://192.168.0.20:8089/HanOracle/test/memberInsert.jsp";
+	String requestURL = "http://192.168.219.105:8089/HanOracle/test/memberInsert.jsp";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -168,11 +168,8 @@ public class JoinActivity extends Activity{
 			}
 		}
 
-		Toast.makeText(this, "しししししししししししし", Toast.LENGTH_SHORT).show();
-
 		bt = new BackgroundTask();
 		bt.execute();
-		Toast.makeText(this, "叔楳喫????????", Toast.LENGTH_SHORT).show();
 		
 	}
 	
@@ -261,11 +258,9 @@ public class JoinActivity extends Activity{
 	class BackgroundTask extends AsyncTask<String, Void, Void>{
 		
 		protected Void doInBackground(String ... value){
-			/*RequestXml_Member.requestGet_memberInsert(requestURL, join_et_id.getText().toString(), 
+			RequestXml_Member.requestGet_memberInsert(requestURL, join_et_id.getText().toString(), 
 													  join_et_pwd.getText().toString(),join_et_name.getText().toString(), 
-													  join_et_nick.getText().toString(), join_et_email.getText().toString());*/
-			requestURL = "http://192.168.0.20:8089/HanOracle/test/board_delete.jsp?parkNum=104";
-			RequestXml_Member.requestGet(requestURL);
+													  join_et_nick.getText().toString(), join_et_email.getText().toString());
 			return null;
 		}
 		
