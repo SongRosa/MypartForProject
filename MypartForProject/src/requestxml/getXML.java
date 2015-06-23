@@ -56,7 +56,7 @@ public class getXML {
     	return dbCheck;
     }
 	
-	public static ArrayList getXml_searchId(InputStream is, String requestURL) {
+	public static ArrayList getXml_search(InputStream is, String requestURL) {
 	
 		ArrayList list = new ArrayList();
 		String id="";
@@ -111,5 +111,52 @@ public class getXML {
 
 		Log.i("xxxx", "result 반환할꺼임.");
     	return list;
+    }
+	
+	public static String getXml_updatePwd(String requestURL) {
+		
+		String id="";
+		String s = "";
+		
+    	Log.i("xxx", "getXML start!");
+    	URL text = null;
+    	
+		try {
+			text = new URL(requestURL);
+			Log.i("xxx", requestURL);
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	try {
+    		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+    		XmlPullParser parser = factory.newPullParser();
+			
+			parser.setInput(text.openStream(), "UTF-8");
+			
+			int eventType = parser.getEventType();
+			
+			while( eventType != XmlPullParser.END_DOCUMENT) {
+				switch(eventType) {
+				
+				case XmlPullParser.START_TAG:
+					String startTag = parser.getName();
+					if(startTag.equals("check")){
+						Log.i("xxxx", "check태그 찾음");
+						Log.i("xxx", "idCount :::: " + s);
+						
+					}
+					break;
+				}								
+				eventType = parser.next();
+			}
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+		} catch (IOException ie) {
+			ie.printStackTrace();
+		}
+
+		Log.i("xxxx", "result 반환할꺼임.");
+    	return s;
     }
 }

@@ -126,7 +126,7 @@ public class SearchpwdActivity extends Activity {
 			Log.i("xxxx", "String배열 선언");
 			is = RequestXml_Member.requestGet_memberLogin(requestURL);
 			Log.i("xxxx", "requestXml 실행.");
-			result = getXML.getXml_searchId(is, requestURL);
+			result = getXML.getXml_search(is, requestURL);
 			Log.i("xxxx", "getXml 실행");
 			return result;
 		}

@@ -84,5 +84,5 @@ public class RequestXml_Member {
 			return null;
 		}
 	}
-	
+
 }

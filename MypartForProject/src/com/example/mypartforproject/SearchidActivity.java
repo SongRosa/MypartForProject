@@ -83,7 +83,7 @@ public class SearchidActivity extends Activity {
 			}
 		}
 		
-		requestURL = "http://192.168.1.45:8338/HanOracle/test/searchMemberId.jsp?email="+searchid_et_email.getText().toString()+"&name="+searchid_et_name.getText().toString();
+		requestURL = "http://192.168.219.103:8338/HanOracle/test/searchMemberId.jsp?email="+searchid_et_email.getText().toString()+"&name="+searchid_et_name.getText().toString();
 		bt = new BackgroundTask();
 		bt.execute();
 	}
@@ -118,7 +118,7 @@ public class SearchidActivity extends Activity {
 			Log.i("xxxx", "String배열 선언");
 			is = RequestXml_Member.requestGet_memberLogin(requestURL);
 			Log.i("xxxx", "requestXml 실행.");
-			result = getXML.getXml_searchId(is, requestURL);
+			result = getXML.getXml_search(is, requestURL);
 			Log.i("xxxx", "getXml 실행");
 			return result;
 		}

@@ -1,9 +1,16 @@
 package com.example.mypartforproject;
 
+import java.io.InputStream;
+
+import com.example.mypartforproject.JoinActivity.BackgroundTask;
+
+import requestxml.RequestXml_Member;
+import requestxml.getXML;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +24,11 @@ public class SearchpwdChangeActivity extends Activity {
 	
 	TextView searchpwdchange_tv_pwd;
 	
+	String searchId = "";
+
+	BackgroundTask bt;
+	String requestURL = "";
+	int checkChanged = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +38,10 @@ public class SearchpwdChangeActivity extends Activity {
 		searchpwdchange_et_pwd1 = (EditText)findViewById(R.id.searchpwdchange_et_pwd1);
 		
 		searchpwdchange_tv_pwd = (TextView)findViewById(R.id.searchpwdchange_tv_pwd);
+
+		Intent it = getIntent();
+		searchId = it.getStringExtra("SearchId");
+		
 	}
 	
 	public void ChangepwdButtonClicked(View v){		
@@ -60,18 +76,9 @@ public class SearchpwdChangeActivity extends Activity {
 			}
 		}
 		
-		new AlertDialog.Builder(this)
-			.setTitle("비밀번호 재설정 성공")
-			.setMessage("비밀번호가 재설정되었습니다.")
-			.setNeutralButton("로그인하러가기", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Intent it = new Intent(getApplicationContext(), LoginActivity.class);
-					startActivity(it);
-					finish();
-				}
-			}).show();
+		requestURL = "http://192.168.219.103:8338/HanOracle/test/memberUpdatePwd.jsp?id="+searchId+"&pwd="+searchpwdchange_et_pwd.getText().toString();
+		bt = new BackgroundTask();
+		bt.execute();
 	}
 	
 	public void LogoButtonClicked(View v){
@@ -85,5 +92,30 @@ public class SearchpwdChangeActivity extends Activity {
 		Intent it = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivity(it);
 		finish();
+	}
+	
+    //AsyncTask 스레드 시작
+	class BackgroundTask extends AsyncTask<String, Void, Integer>{
+		InputStream is;
+		protected Integer doInBackground(String ... value){
+			is = RequestXml_Member.requestGet_memberLogin(requestURL);
+			checkChanged = getXML.getXml(is, requestURL);
+			
+			return checkChanged;
+		}
+		
+		protected void onPostExecute(Integer result){	
+			
+			if(result == 1){
+				Toast.makeText(getApplicationContext(), "비밀번호가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+				
+				Intent it = new Intent(SearchpwdChangeActivity.this, LoginActivity.class);
+				startActivity(it);
+				finish();
+			}else{
+				Toast.makeText(getApplicationContext(), "비밀번호 변경 실패", Toast.LENGTH_SHORT).show();
+				return;
+			}
+		}
 	}
 }
