@@ -9,13 +9,18 @@ import android.widget.TextView;
 public class SearchidConformActivity extends Activity {
 
 	TextView searchidconform_tv_id;
-	
+	String searchId = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_searchidconform);
 		
-		searchidconform_tv_id = (TextView)findViewById(R.id.searchidconform_tv_id); 
+		Intent it = getIntent();
+		searchId = it.getStringExtra("SearchId");
+		
+		searchidconform_tv_id = (TextView)findViewById(R.id.searchidconform_tv_id);
+		
+		searchidconform_tv_id.setText(searchId);
 	}
 	
 	public void GoLoginButtonClicked(View v){

@@ -1,11 +1,17 @@
 package com.example.mypartforproject;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import requestxml.RequestXml_Member;
+import requestxml.getXML;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +24,9 @@ public class SearchidActivity extends Activity {
 	
 	TextView searchid_tv_name;
 	TextView searchid_tv_email;
+	
+	BackgroundTask bt;
+	String requestURL = "";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +50,9 @@ public class SearchidActivity extends Activity {
 		 */
 		int emailCheck = 0;
 		int nameCheck = 0;
+		
+		int idCheck = 0; // 0 이면 아이디가 존재하지 않음.
+		String id = "";
 		int i = 0;
 		
 		if(true){
@@ -71,12 +83,9 @@ public class SearchidActivity extends Activity {
 			}
 		}
 		
-		if(i == 0){ // 찾아지는 정보가 있다면!
-			Intent it = new Intent(getApplicationContext(), SearchidConformActivity.class);
-			startActivity(it);
-			finish();
-		}else{}
-		
+		requestURL = "http://192.168.1.45:8338/HanOracle/test/searchMemberId.jsp?email="+searchid_et_email.getText().toString()+"&name="+searchid_et_name.getText().toString();
+		bt = new BackgroundTask();
+		bt.execute();
 	}
 	
 	public boolean checkEmail(String email){
@@ -100,4 +109,46 @@ public class SearchidActivity extends Activity {
 		startActivity(it);
 		finish();
 	}
+	
+	  //AsyncTask 스레드 시작
+	class BackgroundTask extends AsyncTask<String, Void, ArrayList>{
+			InputStream is;
+		protected ArrayList doInBackground(String ... value){
+			ArrayList result;
+			Log.i("xxxx", "String배열 선언");
+			is = RequestXml_Member.requestGet_memberLogin(requestURL);
+			Log.i("xxxx", "requestXml 실행.");
+			result = getXML.getXml_searchId(is, requestURL);
+			Log.i("xxxx", "getXml 실행");
+			return result;
+		}
+		
+		protected void onPostExecute(ArrayList result){
+			super.onPostExecute(result);
+			Log.i("dddd", "onPostExecute 실행");
+			
+			if(result.get(0).toString().equals("1")){
+				Intent it = new Intent(getApplicationContext(), SearchidConformActivity.class);
+				it.putExtra("SearchId", result.get(1).toString());
+				startActivity(it);
+				finish();
+			}else{
+				Toast.makeText(getApplicationContext(), "일치하는 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+			}
+		}
+		
+		protected void onCancelled(){
+			super.onCancelled();
+		}
+	}
+	
+	
+	/*
+	 * 
+		if(i == 0){ // 찾아지는 정보가 있다면!
+			Intent it = new Intent(getApplicationContext(), SearchidConformActivity.class);
+			startActivity(it);
+			finish();
+		}else{}
+	 * */
 }

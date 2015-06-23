@@ -1,22 +1,50 @@
 package com.example.mypartforproject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import requestxml.RequestXml_Member;
+import requestxml.getXML;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class LoginActivity extends Activity {
 
 	EditText login_et_id;
 	EditText login_et_pwd;
+
+	BackgroundTask bt;
+	String requestURL = "";
 	
+	getXML gx;
+	
+	CheckBox login_chk_autologin;
+	public SharedPreferences setting;
+	public SharedPreferences.Editor editor;	
+	
+	int pwdCheck = 0;
+	int dbCheck = 0;
+	int goToLogin = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,6 +52,32 @@ public class LoginActivity extends Activity {
 		
 		login_et_id = (EditText)findViewById(R.id.login_et_id);
 		login_et_pwd = (EditText)findViewById(R.id.login_et_pwd);
+		
+		login_chk_autologin = (CheckBox)findViewById(R.id.login_chk_autologin);
+		login_chk_autologin.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if(isChecked){
+					editor.putString("ID", login_et_id.getText().toString());
+					editor.putString("PWD", login_et_pwd.getText().toString());
+					editor.putBoolean("Auto_Login_enabled", true);
+					editor.commit();
+				}else{
+					editor.clear();
+					editor.commit();
+				}
+			}
+		});
+
+		setting = getSharedPreferences("setting", 0);
+		editor = setting.edit();
+		
+		if(setting.getBoolean("Auto_Login_enabled", false)){
+			login_et_id.setText(setting.getString("ID", ""));
+			login_et_pwd.setText(setting.getString("PWD", ""));
+			login_chk_autologin.setChecked(true);
+		}
 	}
 
 	@Override
@@ -42,12 +96,6 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void LoginButtonClicked(View v){
-		/**
-		 *  아이디와 비밀번호가 DB에 저장된 내용과 일치한다면!? i = 0
-		 *  비밀번호가 틀렸으면 i = 1
-		 *  아이디가 존재하지 않으면  i = 2
-		 */
-		int i = 2;
 		
 		if(login_et_id.getText().length() == 0){
 			new AlertDialog.Builder(this)
@@ -69,33 +117,48 @@ public class LoginActivity extends Activity {
 					dialog.cancel();
 				}
 			}).show();				
-		}else{
-			if(i == 0){
-				Intent it = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(it);
-				finish();
-			}else if(i == 1){
-				new AlertDialog.Builder(this)
-					.setTitle("로그인 실패")
-					.setMessage("아이디와 비밀번호가 일치하지 않습니다.")
-					.setNeutralButton("팝업창 닫기", new DialogInterface.OnClickListener() {					
-						@Override
-						public void onClick(DialogInterface dialog, int which) {	
-							dialog.cancel();
-						}
-					}).show();				
-			}else if(i == 2){
-				new AlertDialog.Builder(this)
-					.setTitle("로그인 실패")
-					.setMessage("아이디가 존재하지 않습니다.")
-					.setNeutralButton("팝업창 닫기", new DialogInterface.OnClickListener() {					
-						@Override
-						public void onClick(DialogInterface dialog, int which) {	
-							dialog.cancel();
-						}
-					}).show();
-			}
+		}else{			
+				requestURL = "http://192.168.1.45:8338/HanOracle/test/memberLogin.jsp?id="+login_et_id.getText().toString()+"&pwd="+login_et_pwd.getText().toString();
+				
+				Log.i("xxx", requestURL);
+				bt = new BackgroundTask();
+				bt.execute();
+				//bt.onPostExecute();
 		}		
+	}
+	
+	public void result(){
+		if(goToLogin == 1){
+		if(pwdCheck == 1){
+			Log.i("yyy", "아이디와 비번이 일치함!!!!");
+			Intent it = new Intent(getApplicationContext(), MainActivity.class);
+			startActivity(it);
+			finish();
+		}else if(pwdCheck == 0){
+			Log.i("yyy", "아이디와 비밀번호가 일치하지 않습니다");
+			new AlertDialog.Builder(this)
+				.setTitle("로그인 실패")
+				.setMessage("아이디와 비밀번호가 일치하지 않습니다.")
+				.setNeutralButton("팝업창 닫기", new DialogInterface.OnClickListener() {					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {	
+						dialog.cancel();
+					}
+				}).show();				
+		}else if(pwdCheck == -1){
+			Log.i("yyy", "p아이디가 존재하지 않습니다");
+			new AlertDialog.Builder(this)
+				.setTitle("로그인 실패")
+				.setMessage("아이디가 존재하지 않습니다.")
+				.setNeutralButton("팝업창 닫기", new DialogInterface.OnClickListener() {					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {	
+						dialog.cancel();
+					}
+				}).show();
+		}
+			goToLogin = 0;
+		}
 	}
 	
 	public void SearchidButtonClicked(View v){
@@ -141,5 +204,29 @@ public class LoginActivity extends Activity {
 			break;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	  //AsyncTask 스레드 시작
+	class BackgroundTask extends AsyncTask<String, Void, Integer>{
+		InputStream is;
+		
+		protected Integer doInBackground(String ... value){
+			is = RequestXml_Member.requestGet_memberLogin(requestURL);
+			
+			pwdCheck = getXML.getXml(is, requestURL);
+			
+			return pwdCheck;
+		}
+		
+		protected void onPostExecute(Integer result){
+			super.onPostExecute(result);
+			Log.i("dddd", "onPostExecute 실행");
+			goToLogin = 1;
+			result();
+		}
+		
+		protected void onCancelled(){
+			super.onCancelled();
+		}
 	}
 }
