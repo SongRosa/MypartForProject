@@ -46,7 +46,7 @@ public class JoinActivity extends Activity{
 	int email = 0;
 	
 	BackgroundTask bt;
-	String requestURL = "http://192.168.1.45:8338/HanOracle/test/memberInsert.jsp";
+	String requestURL = "http://192.168.219.103:8338/HanOracle/test/memberInsert.jsp";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -258,7 +258,12 @@ public class JoinActivity extends Activity{
 			return null;
 		}
 		
-		protected void onPostExecute(){	
+		protected void onPostExecute(Void result){	
+			Toast.makeText(getApplicationContext(), "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+			
+			Intent it = new Intent(JoinActivity.this, LoginActivity.class);
+			startActivity(it);
+			finish();
 		}
 	}
 }
