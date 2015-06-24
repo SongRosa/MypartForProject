@@ -2,8 +2,13 @@ package com.example.mypartforproject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 
 import requestxml.RequestXml_Member;
 import requestxml.getXML;
@@ -89,9 +94,6 @@ public class SearchpwdActivity extends Activity {
 			}
 		}
 		
-		requestURL = "http://192.168.219.103:8338/HanOracle/test/searchMemberPwd.jsp?id="+searchpwd_et_id.getText().toString()
-																				 +"&email="+searchpwd_et_email.getText().toString()
-																				 +"&name="+searchpwd_et_name.getText().toString();
 		bt = new BackgroundTask();
 		bt.execute();
 	}
@@ -124,8 +126,17 @@ public class SearchpwdActivity extends Activity {
 		protected ArrayList doInBackground(String ... value){
 			ArrayList result;
 			Log.i("xxxx", "String배열 선언");
-			is = RequestXml_Member.requestGet_memberLogin(requestURL);
+		//	is = RequestXml_Member.requestGet_memberLogin(requestURL);
 			Log.i("xxxx", "requestXml 실행.");
+			
+
+			List<NameValuePair> dataList = new ArrayList<NameValuePair>();
+			dataList.add(new BasicNameValuePair("id",  searchpwd_et_id.getText().toString()));
+			dataList.add(new BasicNameValuePair("name",  searchpwd_et_name.getText().toString()));
+			dataList.add(new BasicNameValuePair("email", searchpwd_et_email.getText().toString()));
+
+			requestURL = "http://192.168.1.45:8338/HanOracle/test/searchMemberPwd.jsp?" + URLEncodedUtils.format(dataList, "utf-8");
+			
 			result = getXML.getXml_search(is, requestURL);
 			Log.i("xxxx", "getXml 실행");
 			return result;
@@ -135,12 +146,7 @@ public class SearchpwdActivity extends Activity {
 			super.onPostExecute(result);
 			Log.i("dddd", "onPostExecute 실행");
 			
-			if(result.get(0).toString().equals("1")){/*
-				Intent it = new Intent(getApplicationContext(), SearchidConformActivity.class);
-				it.putExtra("SearchId", result.get(1).toString());
-				startActivity(it);
-				finish();*/
-
+			if(result.get(0).toString().equals("1")){
 				Intent it = new Intent(getApplicationContext(), SearchpwdChangeActivity.class);
 				it.putExtra("SearchId", result.get(1).toString());
 				startActivity(it);

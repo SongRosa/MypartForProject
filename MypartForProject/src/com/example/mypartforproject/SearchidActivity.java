@@ -1,9 +1,16 @@
 package com.example.mypartforproject;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.message.BasicNameValuePair;
 
 import requestxml.RequestXml_Member;
 import requestxml.getXML;
@@ -50,11 +57,7 @@ public class SearchidActivity extends Activity {
 		 */
 		int emailCheck = 0;
 		int nameCheck = 0;
-		
-		int idCheck = 0; // 0 이면 아이디가 존재하지 않음.
-		String id = "";
-		int i = 0;
-		
+				
 		if(true){
 			if(searchid_et_email.getText().length() == 0){
 				searchid_tv_email.setText("이메일을 입력해주세요.");
@@ -83,7 +86,6 @@ public class SearchidActivity extends Activity {
 			}
 		}
 		
-		requestURL = "http://192.168.219.103:8338/HanOracle/test/searchMemberId.jsp?email="+searchid_et_email.getText().toString()+"&name="+searchid_et_name.getText().toString();
 		bt = new BackgroundTask();
 		bt.execute();
 	}
@@ -116,8 +118,15 @@ public class SearchidActivity extends Activity {
 		protected ArrayList doInBackground(String ... value){
 			ArrayList result;
 			Log.i("xxxx", "String배열 선언");
-			is = RequestXml_Member.requestGet_memberLogin(requestURL);
-			Log.i("xxxx", "requestXml 실행.");
+			Log.i("xxxx", "requestXml 실행.");			
+			
+			List<NameValuePair> dataList = new ArrayList<NameValuePair>();
+			dataList.add(new BasicNameValuePair("name",  searchid_et_name.getText().toString()));
+			dataList.add(new BasicNameValuePair("email", searchid_et_email.getText().toString()));
+			
+			
+			requestURL = "http://192.168.1.45:8338/HanOracle/test/searchMemberId.jsp?" + URLEncodedUtils.format(dataList, "utf-8");
+			
 			result = getXML.getXml_search(is, requestURL);
 			Log.i("xxxx", "getXml 실행");
 			return result;
@@ -140,15 +149,5 @@ public class SearchidActivity extends Activity {
 		protected void onCancelled(){
 			super.onCancelled();
 		}
-	}
-	
-	
-	/*
-	 * 
-		if(i == 0){ // 찾아지는 정보가 있다면!
-			Intent it = new Intent(getApplicationContext(), SearchidConformActivity.class);
-			startActivity(it);
-			finish();
-		}else{}
-	 * */
+	}	
 }

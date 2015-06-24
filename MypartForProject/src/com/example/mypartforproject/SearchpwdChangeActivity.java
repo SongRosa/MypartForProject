@@ -1,6 +1,11 @@
 package com.example.mypartforproject;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.example.mypartforproject.JoinActivity.BackgroundTask;
 
@@ -76,7 +81,7 @@ public class SearchpwdChangeActivity extends Activity {
 			}
 		}
 		
-		requestURL = "http://192.168.219.103:8338/HanOracle/test/memberUpdatePwd.jsp?id="+searchId+"&pwd="+searchpwdchange_et_pwd.getText().toString();
+		requestURL = "http://192.168.1.45:8338/HanOracle/test/memberUpdatePwd.jsp?id="+searchId+"&pwd="+searchpwdchange_et_pwd.getText().toString();
 		bt = new BackgroundTask();
 		bt.execute();
 	}
@@ -98,7 +103,8 @@ public class SearchpwdChangeActivity extends Activity {
 	class BackgroundTask extends AsyncTask<String, Void, Integer>{
 		InputStream is;
 		protected Integer doInBackground(String ... value){
-			is = RequestXml_Member.requestGet_memberLogin(requestURL);
+	//	is = RequestXml_Member.requestGet_memberLogin(requestURL);
+			
 			checkChanged = getXML.getXml(is, requestURL);
 			
 			return checkChanged;

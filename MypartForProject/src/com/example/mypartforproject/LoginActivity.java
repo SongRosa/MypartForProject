@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
 			}
 		});
 
-		setting = getSharedPreferences("setting", 0);
+		setting = getSharedPreferences("setting",MODE_PRIVATE);
 		editor = setting.edit();
 		
 		if(setting.getBoolean("Auto_Login_enabled", false)){
@@ -118,7 +118,7 @@ public class LoginActivity extends Activity {
 				}
 			}).show();				
 		}else{			
-				requestURL = "http://192.168.219.103:8338/HanOracle/test/memberLogin.jsp?id="+login_et_id.getText().toString()+"&pwd="+login_et_pwd.getText().toString();
+				requestURL = "http://192.168.1.45:8338/HanOracle/test/memberLogin.jsp?id="+login_et_id.getText().toString()+"&pwd="+login_et_pwd.getText().toString();
 				
 				Log.i("xxx", requestURL);
 				bt = new BackgroundTask();

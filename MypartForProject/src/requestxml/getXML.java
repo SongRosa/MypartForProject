@@ -1,5 +1,6 @@
 package requestxml;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -30,7 +31,7 @@ public class getXML {
     		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
     		XmlPullParser parser = factory.newPullParser();
 			
-			parser.setInput(text.openStream(), "UTF-8");
+			parser.setInput(text.openStream(), "utf-8");
 			
 			int eventType = parser.getEventType();
 			
@@ -75,8 +76,8 @@ public class getXML {
     	try {
     		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
     		XmlPullParser parser = factory.newPullParser();
-			
-			parser.setInput(text.openStream(), "UTF-8");
+			BufferedInputStream bis = new BufferedInputStream(text.openStream());
+			parser.setInput(bis, "UTF-8");//
 			
 			int eventType = parser.getEventType();
 			
@@ -113,10 +114,13 @@ public class getXML {
     	return list;
     }
 	
-	public static String getXml_updatePwd(String requestURL) {
+	public static ArrayList getXml_insert(InputStream is, String requestURL) {
 		
-		String id="";
-		String s = "";
+		ArrayList list = new ArrayList();
+		int s = 0;
+		int idCount = 0;
+		int nickCount = 0;
+		int emailCount = 0;
 		
     	Log.i("xxx", "getXML start!");
     	URL text = null;
@@ -131,8 +135,8 @@ public class getXML {
     	try {
     		XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
     		XmlPullParser parser = factory.newPullParser();
-			
-			parser.setInput(text.openStream(), "UTF-8");
+			BufferedInputStream bis = new BufferedInputStream(text.openStream());
+			parser.setInput(bis, "UTF-8");//
 			
 			int eventType = parser.getEventType();
 			
@@ -142,9 +146,30 @@ public class getXML {
 				case XmlPullParser.START_TAG:
 					String startTag = parser.getName();
 					if(startTag.equals("check")){
-						Log.i("xxxx", "check태그 찾음");
-						Log.i("xxx", "idCount :::: " + s);
+						s = Integer.parseInt(parser.nextText());
+						Log.i("xxx", "check :::: " + s);
 						
+						list.add(0,s);
+					}
+					
+					if(startTag.equals("checkID")){
+						idCount = Integer.parseInt(parser.nextText());
+						Log.i("xxx", "idCount:::: " + idCount);
+						list.add(1,idCount);
+					}
+
+					if(startTag.equals("checkNick")){
+						Log.i("xxxx", "id태그 찾음");
+						nickCount = Integer.parseInt(parser.nextText());
+						Log.i("xxx", "nickCount:::: " + nickCount);
+						list.add(2,nickCount);
+					}
+
+					if(startTag.equals("checkEmail")){
+						Log.i("xxxx", "id태그 찾음");
+						emailCount = Integer.parseInt(parser.nextText());
+						Log.i("xxx", "emailCount:::: " + emailCount);
+						list.add(3,emailCount);
 					}
 					break;
 				}								
@@ -157,6 +182,6 @@ public class getXML {
 		}
 
 		Log.i("xxxx", "result 반환할꺼임.");
-    	return s;
+    	return list;
     }
 }

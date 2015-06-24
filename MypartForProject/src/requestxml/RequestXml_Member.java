@@ -38,7 +38,7 @@ public class RequestXml_Member {
 			HttpClient client = new DefaultHttpClient();
 			
 			System.out.println("requestURL :::::: " + requestURL);
-			requestURL = requestURL + "?id="+id+"&pwd="+pwd+"&name="+name+"&nick="+nick+"&email="+email; 
+			requestURL = requestURL + "?id="+id+"&pwd="+pwd+"&name="+name+"&nick="+nick+"&email="+email;
 			
 			System.out.println(requestURL);
 			
@@ -85,4 +85,34 @@ public class RequestXml_Member {
 		}
 	}
 
+	public static InputStream requestGet_memberSearchId(String requestURL, String name, String email){/*, String id, String pwd*/
+		try{
+			
+			HttpClient client = new DefaultHttpClient();
+			
+			System.out.println(requestURL);
+			
+			List<NameValuePair> dataList = new ArrayList<NameValuePair>();
+			dataList.add(new BasicNameValuePair("name", name));
+			dataList.add(new BasicNameValuePair("email", email));		
+			
+			requestURL = requestURL + "?" + URLEncodedUtils.format(dataList, "utf-8");
+			HttpGet get = new HttpGet(requestURL);
+			System.out.println("HttpGet");
+			
+			HttpResponse response = client.execute(get);
+			System.out.println("execute");
+			
+			HttpEntity entity = response.getEntity();
+			System.out.println("getEntity");
+			
+			InputStream is = entity.getContent();
+			System.out.println("getContent");
+
+			return is;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

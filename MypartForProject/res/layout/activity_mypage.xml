@@ -384,6 +384,69 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/line"/>
             
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center">                
+                        
+      		 	 <!-- 이름/닉네임 변경(TextView), 수정 버튼 -->
+
+                <LinearLayout
+                    android:layout_width="290dp"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="230dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="start"
+                        android:gravity="center_vertical"
+                        android:text="회원탈퇴"
+                        android:textSize="20sp" />
+
+                    <Button
+                        android:layout_width="50dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="탈퇴"
+                        android:textColor="#ffffff"
+                        android:textSize="15sp"
+		            	android:onClick="GototheDeleteMemberButton" />
+
+                </LinearLayout>
+                
+      		 	 <!-- 변경할 이름 입력, 닉네임, 변경 버튼 -->
+                <LinearLayout 
+                    android:id="@+id/mypage_ll_deleteMember"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
+                    
+                    <Button 
+                        android:id="@+id/mypage_btn_deleteMember"
+                        android:layout_width="265dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/button_style"
+                        android:text="회원탈퇴"
+                        android:textSize="18sp"
+                        android:textColor="#ffffff"
+                        android:onClick="DeleteMemberButtonClicked"/>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <ImageView 
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/line"/>
+     
             <Button 
                 android:layout_width="265dp"
                 android:layout_height="40dp"
